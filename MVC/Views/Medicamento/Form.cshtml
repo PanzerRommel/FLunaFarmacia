@@ -1,0 +1,57 @@
+﻿@model ML.Medicamento
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Formulario</h2>
+<div class="row">
+    <div class="container">
+        <div class="col-md-12">
+            <h2>Medicamento</h2>
+            <h5>Ingrese los datos del Medicamento:</h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <hr />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            @using (Html.BeginForm("Form", "Medicamento", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="form-group">
+                    @Html.HiddenFor(model => model.IdMedicamento)
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SKU)
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-person"></i></span>
+                        @Html.TextBoxFor(model => model.SKU, new { @class = "form-control", @id = "txtSKU"})
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Precio)
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-person"></i></span>
+                        @Html.TextBoxFor(model => model.Precio, new { @class = "form-control", @id = "txtPrecio"})
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Nombre)
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-person"></i></span>
+                        @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @id = "txtNombre"})
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <input type="submit" value="Guardar" class="btn btn-success" />
+                    @Html.ActionLink("Regresar", "GetAll", "Medicamento", null, new { @class = "btn btn-danger" })
+                </div>
+            }
+        </div>
+    </div>
+</div>
