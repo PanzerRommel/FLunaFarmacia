@@ -1,0 +1,53 @@
+﻿@model ML.Usuario
+@{
+     ViewData["Title"] = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Usuarios</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        <h5>Seleccione un Usuario + para agregar...</h5>
+    </div>
+</div>
+
+<div style="float:right;">
+    @Html.ActionLink("Agregar Usuario", "Form", "Usuario", htmlAttributes: new {@class = "btn btn-success"})   
+</div>
+
+<table class="table table-bordered table-responsive">
+    <thead>
+        <tr>
+            <td>Editar</td>
+
+            <td class="visually-hidden">IdUsuario</td>
+            <td>Nombre</td>
+            <td>Email</td>
+            <td class="visually-hidden">Password</td>
+
+            <td>Eliminar</td>
+        </tr>
+
+    </thead>
+    <tbody>
+        @foreach (ML.Usuario usuario in Model.Usuarios)
+        {
+            <tr>
+                <td><a class="btn btn-warning bi bi-pencil-square" href="@Url.Action("Form", "Usuario", new { IdUsuario = usuario.IdUsuario })"></a></td>
+
+                <td class="visually-hidden">@usuario.IdUsuario</td>
+                <td>@usuario.Nombre</td>
+                <td>@usuario.Email</td>
+                <td class="visually-hidden">@usuario.Password</td>
+
+                <td>
+                    <a class="btn btn-danger bi bi-trash2" href="@Url.Action("Delete", "Usuario", new {IdUsuario = usuario.IdUsuario })" onclick="return confirm('Estas seguro que deseas eliminar este registro?');">   </a>
+                </td>
+
+            </tr>
+        }
+
+    </tbody>
+
+</table>

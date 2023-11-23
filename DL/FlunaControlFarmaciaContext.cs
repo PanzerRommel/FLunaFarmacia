@@ -21,6 +21,8 @@ public partial class FlunaControlFarmaciaContext : DbContext
 
     public virtual DbSet<Pedido> Pedidos { get; set; }
 
+    public virtual DbSet<Usuario> Usuarios { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Server=DESKTOP-VJ5G6F0\\FLUNA; Database= FLunaControlFarmacia; Trusted_Connection=True; TrustServerCertificate=True; User ID=sa; Password=Password1;");
@@ -62,6 +64,23 @@ public partial class FlunaControlFarmaciaContext : DbContext
 
             entity.Property(e => e.Cliente)
                 .HasMaxLength(100)
+                .IsUnicode(false);
+        });
+
+        modelBuilder.Entity<Usuario>(entity =>
+        {
+            entity.HasKey(e => e.IdUsuario).HasName("PK__Usuario__5B65BF973CDBCE71");
+
+            entity.ToTable("Usuario");
+
+            entity.Property(e => e.Email)
+                .HasMaxLength(256)
+                .IsUnicode(false);
+            entity.Property(e => e.Nombre)
+                .HasMaxLength(256)
+                .IsUnicode(false);
+            entity.Property(e => e.Password)
+                .HasMaxLength(256)
                 .IsUnicode(false);
         });
 

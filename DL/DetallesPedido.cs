@@ -8,8 +8,7 @@ public partial class DetallesPedido
     public int IdDetalle { get; set; }
 
     public int? IdPedido { get; set; }
-    public string Cliente { get; set; }
-
+    public string? Cliente {get; set;}
     public int? IdMedicamento { get; set; }
     public string? NombreMedicamento { get; set; }
 
