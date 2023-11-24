@@ -113,18 +113,25 @@ namespace BL
             ML.Result result = new ML.Result();
             try
             {
-                using(DL.FlunaControlFarmaciaContext context = new DL.FlunaControlFarmaciaContext())
+                using (DL.FlunaControlFarmaciaContext context = new DL.FlunaControlFarmaciaContext())
                 {
-                    var query = context.Database.ExecuteSqlRaw($"PedidosAdd '{pedido.Cliente}'");
-                    if (query >= 1)
+                    // Crear una nueva instancia de Pedido y asignar los valores desde el objeto pedido
+                    var nuevoPedido = new DL.Pedido
                     {
-                        result.Correct = true;
-                    }
-                    else
-                    {
-                        result.Correct = false;
-                        result.ErrorMessage = "No se insertó el registro";
-                    }
+                        Cliente = pedido.Cliente,
+                        // Asignar otros campos según sea necesario
+                    };
+
+                    // Agregar el nuevo pedido al contexto
+                    context.Pedidos.Add(nuevoPedido);
+
+                    // Guardar los cambios en la base de datos
+                    context.SaveChanges();
+
+                    // Actualizar el IdPedido en el objeto ML.Pedido con el valor generado por la base de datos
+                    pedido.IdPedido = nuevoPedido.IdPedido;
+
+                    result.Correct = true;
                 }
             }
             catch (Exception ex)
@@ -134,6 +141,7 @@ namespace BL
             }
             return result;
         }
+
         public static ML.Result Update(ML.Pedido pedido)
         {
             ML.Result result = new ML.Result();

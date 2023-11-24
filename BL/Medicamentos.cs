@@ -120,18 +120,27 @@ namespace BL
             ML.Result result = new ML.Result();
             try
             {
-                using(DL.FlunaControlFarmaciaContext context = new FlunaControlFarmaciaContext())
+                using (DL.FlunaControlFarmaciaContext context = new FlunaControlFarmaciaContext())
                 {
-                    var query = context.Database.ExecuteSqlRaw($"MedicamentoAdd {medicamento.SKU} , {medicamento.Precio} , '{medicamento.Nombre}'");
-                    if (query >= 1)
+                    // Crear una nueva instancia de Medicamento y asignar los valores desde el objeto medicamento
+                    var nuevoMedicamento = new DL.Medicamento
                     {
-                        result.Correct = true;
-                    }
-                    else
-                    {
-                        result.Correct = false;
-                        result.ErrorMessage = "No se insertó el registro";
-                    }
+                        Sku = medicamento.SKU,
+                        Precio = medicamento.Precio,
+                        Nombre = medicamento.Nombre
+                        // Asigna otros campos según sea necesario
+                    };
+
+                    // Agregar el nuevo medicamento al contexto
+                    context.Medicamentos.Add(nuevoMedicamento);
+
+                    // Guardar los cambios en la base de datos
+                    context.SaveChanges();
+
+                    // Actualizar el IdMedicamento en el objeto ML.Medicamento con el valor generado por la base de datos
+                    medicamento.IdMedicamento = nuevoMedicamento.IdMedicamento;
+
+                    result.Correct = true;
                 }
             }
             catch (Exception ex)
@@ -141,6 +150,7 @@ namespace BL
             }
             return result;
         }
+
         public static ML.Result Update(ML.Medicamento medicamento)
         {
             ML.Result result = new ML.Result();
