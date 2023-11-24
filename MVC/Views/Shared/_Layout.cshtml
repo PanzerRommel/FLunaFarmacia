@@ -22,21 +22,35 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Pedido" asp-action="GetAll">Pedidos</a>
+                            <a class="nav-link" asp-area="" asp-controller="Pedido" asp-action="GetAll">
+                                <i class="bi bi-cart3 display-4"></i>
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Medicamento" asp-action="GetAll">Medicamentos</a>
+                            <a class="nav-link" asp-area="" asp-controller="Medicamento" asp-action="GetAll">
+                                <i class="bi bi-pill display-4"></i>
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Usuario" asp-action="GetAll">Usuarios</a>
+                            <a class="nav-link" asp-area="" asp-controller="Usuario" asp-action="GetAll">
+                                <i class="bi bi-person display-4"></i>
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">
+                                <i class="bi bi-shield-lock display-4"></i>
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="DetallePedido" asp-action="GetAll">DetallePedido</a>
+                            <a class="nav-link" asp-area="" asp-controller="DetallePedido" asp-action="GetAll">
+                                <i class="bi bi-clipboard-data display-4"></i>
+                            </a>
                         </li>
-
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Login" asp-action="Index">
+                                <i class="bi bi-person display-4"></i>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
