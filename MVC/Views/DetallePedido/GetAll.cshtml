@@ -1,65 +1,56 @@
 ﻿@model ML.DetallePedido
 @{
-     ViewData["Title"] = "GetAll";
+    ViewData["Title"] = "GetAll";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Detalles de Pedidos</h2>
+<h2 class="mb-4">Detalles de Pedidos</h2>
 
-<div class="row">
+<div class="row mb-3">
     <div class="col-md-12">
-       @*  <h5>Seleccione un Usuario + para agregar...</h5> *@
+        @* Agrega un botón para agregar un nuevo detalle de pedido *@
+        <a class="btn btn-success" href="@Url.Action("Form", "DetallePedido")">Agregar Detalle</a>
     </div>
 </div>
 
- <div style="float:right;">
-    @Html.ActionLink("Agregar Pedido", "Form", "DetallePedido", htmlAttributes: new {@class = "btn btn-success"})
-</div> 
-
-<table class="table table-bordered table-responsive">
-    <thead>
-        <tr>
-             <td>Editar</td> 
-
-            <td class="visually-hidden">IdDetalle</td>
-            <td class="visually-hidden">IdPedido</td>
-            <td class="visually-hidden">IdMedicamento</td>
-            <td>Cliente</td>
-            <td>Nombre del Medicamento</td>
-            <td>SKU</td>
-            <td>Cantidad</td>
-
-            <td>Precio Unitario</td>
-            <td>Total</td>
-
-
-             <td>Eliminar</td> 
-        </tr>
-
-    </thead>
-    <tbody>
-        @foreach (ML.DetallePedido detallePedido in Model.DetallesPedidos)
-        {
+<div class="table-responsive">
+    <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
             <tr>
-                 <td><a class="btn btn-warning bi bi-pencil-square" href="@Url.Action("Form", "DetallePedido", new { IdDetalle = detallePedido.IdDetalle })"></a></td> 
-
-                <td class="visually-hidden">@detallePedido.IdDetalle</td>
-                <td class="visually-hidden">@detallePedido.Pedido.IdPedido</td>
-                <td class="visually-hidden">@detallePedido.Medicamento.IdMedicamento</td>
-                <td>@detallePedido.Pedido.Cliente</td>
-                <td>@detallePedido.Medicamento.Nombre</td>
-                <td>@detallePedido.SKU</td>
-                <td>@detallePedido.Cantidad</td>
-                <td>@detallePedido.PrecioUnitario</td>
-                <td>@detallePedido.Total</td>
-
-                 <td>
-                    <a class="btn btn-danger bi bi-trash2" href="@Url.Action("Delete", "DetallePedido", new {IdDetalle = detallePedido.IdDetalle })" onclick="return confirm('Estas seguro que deseas eliminar este registro?');">   </a>
-                </td> 
-
+                <th>Editar</th>
+                <th class="visually-hidden">IdDetalle</th>
+                <th class="visually-hidden">IdPedido</th>
+                <th class="visually-hidden">IdMedicamento</th>
+                <th>Cliente</th>
+                <th>Nombre del Medicamento</th>
+                <th>SKU</th>
+                <th>Cantidad</th>
+                <th>Precio Unitario</th>
+                <th>Total</th>
+                <th>Eliminar</th>
             </tr>
-        }
-
-    </tbody>
-
-</table>
+        </thead>
+        <tbody>
+            @foreach (ML.DetallePedido detallePedido in Model.DetallesPedidos)
+            {
+                <tr>
+                    <td>
+                        <a class="btn btn-warning bi bi-pencil-square" href="@Url.Action("Form", "DetallePedido", new { IdDetalle = detallePedido.IdDetalle })"></a>
+                    </td>
+                    <td class="visually-hidden">@detallePedido.IdDetalle</td>
+                    <td class="visually-hidden">@detallePedido.Pedido.IdPedido</td>
+                    <td class="visually-hidden">@detallePedido.Medicamento.IdMedicamento</td>
+                    <td>@detallePedido.Pedido.Cliente</td>
+                    <td>@detallePedido.Medicamento.Nombre</td>
+                    <td>@detallePedido.SKU</td>
+                    <td>@detallePedido.Cantidad</td>
+                    <td>@detallePedido.PrecioUnitario</td>
+                    <td>@detallePedido.Total</td>
+                    <td>
+                        <a class="btn btn-danger bi bi-trash2" href="@Url.Action("Delete", "DetallePedido", new { IdDetalle = detallePedido.IdDetalle })" onclick="return confirm('¿Estás seguro de que deseas eliminar este registro?');"></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
